@@ -1,13 +1,25 @@
-import { DM_Sans } from "next/font/google";
-
-const dmSans = DM_Sans({ subsets: ["latin"] });
+import HeroSection from "@/components/HeroSection";
+import BioSection from "@/components/BioSection";
+import AboutSection from "@/components/AboutSection";
+import CameraSection from "@/components/CameraSection";
+import ServicesSection from "@/components/ServicesSection";
+import SelectedWorkSection from "@/components/SelectedWorkSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import NewsSection from "@/components/NewsSection";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center">
-      <h1 className={`${dmSans.className} text-yellow-400 text-6xl font-bold tracking-widest uppercase`}>
-        Harvey Specter
-      </h1>
+    <main>
+      <HeroSection />
+      <BioSection />
+      <AboutSection />
+      <CameraSection />
+      <ServicesSection />
+      <SelectedWorkSection />
+      <TestimonialsSection />
+      <NewsSection />
+      <Footer />
     </main>
   );
 }
