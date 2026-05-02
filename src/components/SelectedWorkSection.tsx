@@ -1,27 +1,9 @@
 import Image from "next/image";
-
-const projects = [
-  {
-    title: "Surfers Paradise",
-    image: "/surfboard.png",
-    objectPosition: "center 30%",
-  },
-  {
-    title: "Cyberpunk Caffe",
-    image: "/desktopgirl.png",
-    objectPosition: "center",
-  },
-  {
-    title: "Agency 976",
-    image: "/girlgreendesktop.png",
-    objectPosition: "center",
-  },
-  {
-    title: "Minimal Playground",
-    image: "/desktopbuilding.png",
-    objectPosition: "center",
-  },
-];
+import { client } from "@/sanity/lib/client";
+import {
+  featuredPortfolioQuery,
+  type PortfolioItem,
+} from "@/sanity/lib/queries";
 
 function ArrowIcon({ className = "" }: { className?: string }) {
   return (
@@ -31,21 +13,23 @@ function ArrowIcon({ className = "" }: { className?: string }) {
       className={className}
       fill="currentColor"
     >
-      {/* Chunky northeast arrow: shaft + arrowhead */}
       <path d="M6 18.5 L14 10.5 L9 10.5 L9 7 L20 7 L20 18 L16.5 18 L16.5 13 L8.5 21 Z" />
     </svg>
   );
 }
 
-function Tags() {
+function Tags({ tags }: { tags?: string[] }) {
+  if (!tags?.length) return null;
   return (
     <div className="absolute bottom-[11px] left-[16px] flex gap-[7px] md:bottom-[15px] md:left-[20px]">
-      <span className="rounded-full bg-black/30 px-[10px] py-[4px] text-[12px] leading-none text-black backdrop-blur-sm md:text-[13px]">
-        Social Media
-      </span>
-      <span className="rounded-full bg-black/30 px-[10px] py-[4px] text-[12px] leading-none text-black backdrop-blur-sm md:text-[13px]">
-        Photography
-      </span>
+      {tags.map((tag) => (
+        <span
+          key={tag}
+          className="rounded-full bg-black/30 px-[10px] py-[4px] text-[12px] leading-none text-black backdrop-blur-sm md:text-[13px]"
+        >
+          {tag}
+        </span>
+      ))}
     </div>
   );
 }
@@ -54,22 +38,22 @@ function ProjectCard({
   project,
   className = "",
 }: {
-  project: (typeof projects)[number];
+  project: PortfolioItem;
   className?: string;
 }) {
   return (
     <article className={className}>
       <div className="relative aspect-[322/371] overflow-hidden bg-zinc-200 md:aspect-[606/671]">
         <Image
-          src={project.image}
+          src={project.imagePath}
           alt={`${project.title} project`}
           fill
           quality={95}
           sizes="(min-width: 768px) 50vw, 100vw"
-          style={{ objectPosition: project.objectPosition }}
+          style={{ objectPosition: project.objectPosition ?? "center" }}
           className="object-cover"
         />
-        <Tags />
+        <Tags tags={project.tags} />
       </div>
       <div className="mt-[10px] flex items-center justify-between gap-4 md:mt-[12px]">
         <h3 className="text-[23px] font-black uppercase leading-none tracking-[-0.05em] md:text-[32px]">
@@ -81,7 +65,21 @@ function ProjectCard({
   );
 }
 
-export default function SelectedWorkSection() {
+export default async function SelectedWorkSection() {
+  const projects = await client.fetch<PortfolioItem[]>(
+    featuredPortfolioQuery,
+    {},
+    { next: { revalidate: 60 } }
+  );
+
+  // Desktop staggered layout: 2nd item drops, 3rd swaps with 2nd, 4th offset.
+  const layout = [
+    { index: 0, className: "" },
+    { index: 2, className: "md:mt-[215px]" },
+    { index: 1, className: "" },
+    { index: 3, className: "md:mt-[46px]" },
+  ];
+
   return (
     <section className="bg-[#f7f7f6] text-black">
       <div className="relative px-[16px] pb-[42px] pt-[47px] md:px-[28px] md:pb-[68px] md:pt-[76px]">
@@ -114,13 +112,19 @@ export default function SelectedWorkSection() {
         </p>
 
         <div className="mt-[35px] grid gap-[28px] md:mt-[62px] md:grid-cols-2 md:gap-x-[22px] md:gap-y-[110px]">
-          <ProjectCard project={projects[0]} />
-          <ProjectCard project={projects[2]} className="md:mt-[215px]" />
-          <ProjectCard project={projects[1]} />
-          <ProjectCard project={projects[3]} className="md:mt-[46px]" />
+          {layout.map(({ index, className }) => {
+            const project = projects[index];
+            if (!project) return null;
+            return (
+              <ProjectCard
+                key={project._id}
+                project={project}
+                className={className}
+              />
+            );
+          })}
         </div>
 
-        {/* CTA: centered text + button on mobile, anchored bottom-left on desktop with extra top spacing */}
         <div className="relative mx-auto mt-[40px] max-w-[343px] px-[31px] py-[24px] text-center md:mx-0 md:mt-[60px] md:h-[103px] md:w-[410px] md:max-w-none md:px-[32px] md:py-[17px] md:text-left">
           <span className="absolute left-0 top-0 h-[14px] w-[14px] border-l border-t border-black" />
           <span className="absolute right-0 top-0 h-[14px] w-[14px] border-r border-t border-black" />
