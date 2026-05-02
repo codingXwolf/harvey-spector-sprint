@@ -1,4 +1,7 @@
+'use client'
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 /**
  * HERO SECTION
@@ -19,6 +22,17 @@ import Image from "next/image";
 const navLinks = ["About", "Services", "Projects", "News", "Contact"];
 
 export default function HeroSection() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
   return (
     // Full-viewport hero. min-h prevents collapse on very short screens.
     // overflow-hidden so the scaled background can't bleed out.
@@ -147,11 +161,66 @@ export default function HeroSection() {
           ))}
         </div>
 
-        {/* "Let's talk" CTA — visible on both mobile and desktop. */}
-        <button className="rounded-full bg-black px-[18px] py-[12px] text-[14px] font-medium leading-none text-white">
+        {/* Desktop CTA */}
+        <button className="hidden rounded-full bg-black px-[18px] py-[12px] text-[14px] font-medium leading-none text-white md:block">
           Let&apos;s talk
         </button>
+
+        {/* Mobile hamburger */}
+        <button
+          type="button"
+          aria-label="Open menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+          className="flex h-[36px] w-[36px] flex-col items-center justify-center gap-[6px] md:hidden"
+        >
+          <span className="block h-[2px] w-[22px] bg-black" />
+          <span className="block h-[2px] w-[22px] bg-black" />
+        </button>
       </nav>
+
+      {/* Mobile fullscreen menu overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-black text-white md:hidden">
+          <div className="flex items-center justify-between px-[18px] py-[24px]">
+            <a
+              href="#"
+              className="text-[18px] font-semibold leading-none tracking-[-0.04em] text-white"
+            >
+              H.Studio
+            </a>
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={() => setMenuOpen(false)}
+              className="relative h-[36px] w-[36px]"
+            >
+              <span className="absolute left-1/2 top-1/2 block h-[2px] w-[22px] -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white" />
+              <span className="absolute left-1/2 top-1/2 block h-[2px] w-[22px] -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white" />
+            </button>
+          </div>
+          <ul className="flex flex-1 flex-col items-center justify-center gap-[28px] text-[28px] font-medium">
+            {navLinks.map((link) => (
+              <li key={link}>
+                <a
+                  href={`#${link.toLowerCase()}`}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link}
+                </a>
+              </li>
+            ))}
+            <li>
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="mt-[12px] rounded-full bg-white px-[22px] py-[12px] text-[15px] font-medium leading-none text-black"
+              >
+                Let&apos;s talk
+              </button>
+            </li>
+          </ul>
+        </div>
+      )}
 
       {/*
         EYEBROW LABEL — "[ HELLO I'M ]" (z-30)
@@ -177,7 +246,7 @@ export default function HeroSection() {
         - Mobile: bottom-[30px] right-[18px]
           Desktop: bottom-[42px] right-[40px]
       */}
-      <div className="absolute bottom-[30px] right-[18px] z-30 w-[280px] md:bottom-[42px] md:right-[40px]">
+      <div className="absolute bottom-[30px] left-1/2 z-30 flex w-[280px] -translate-x-1/2 flex-col items-center text-center md:bottom-[42px] md:left-auto md:right-[40px] md:translate-x-0 md:items-start md:text-left">
         <p className="text-[13px] font-bold uppercase leading-[1.08] tracking-[-0.04em] text-black md:text-[14px]">
           H.Studio is a <em className="font-normal">full-service</em> creative
           studio creating beautiful digital experiences and products. We are an{" "}
