@@ -11,7 +11,7 @@ export default function HeroSection() {
         fill
         priority
         sizes="100vw"
-        className="z-0 object-cover object-center"
+        className="z-0 object-cover object-[center_35%] scale-100 md:scale-[1.25] md:object-[center_30%]"
       />
 
       <h1
@@ -35,7 +35,7 @@ export default function HeroSection() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center [clip-path:ellipse(13%_42%_at_50%_45%)] md:[clip-path:ellipse(9%_1%_at_50%_47%)]"
+          className="object-cover object-[center_35%] scale-100 md:scale-[1.35] md:object-[center_30%] [clip-path:ellipse(13%_42%_at_50%_45%)] md:[clip-path:ellipse(9%_1%_at_50%_47%)]"
         />
       </div>
 
