@@ -1,6 +1,41 @@
+"use client";
+
+import { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function BioSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const headlineRef = useRef<HTMLHeadingElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (!sectionRef.current || !headlineRef.current) return;
+
+    const tween = gsap.fromTo(
+      headlineRef.current,
+      { backgroundPositionX: "100%" },
+      {
+        backgroundPositionX: "0%",
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          end: "bottom 45%",
+          scrub: true,
+        },
+      }
+    );
+
+    return () => {
+      tween.scrollTrigger?.kill();
+      tween.kill();
+    };
+  }, []);
+
   return (
-    <section className="bg-[#f7f7f6] text-black">
+    <section ref={sectionRef} className="bg-[#f7f7f6] text-black">
       <div className="relative px-[11px] pt-[34px] pb-[40px] md:px-[40px] md:pt-[40px] md:pb-[60px]">
         {/* Top: [ 8+ YEARS IN INDUSTRY ] above thin divider line (right on desktop, centered on mobile) */}
         <p
@@ -20,8 +55,17 @@ export default function BioSection() {
         </div>
 
         <h2
+          ref={headlineRef}
           className="mx-auto text-center font-light uppercase leading-[0.95] tracking-[-0.02em] text-[#050505] md:mx-0 md:max-w-none md:text-left md:leading-[0.84]"
-          style={{ fontSize: "clamp(26px, 7.2vw, 96px)" }}
+          style={{
+            fontSize: "clamp(26px, 7.2vw, 96px)",
+            backgroundImage:
+              "linear-gradient(to right, #050505 0%, #050505 50%, rgba(5, 5, 5, 0.16) 50%, rgba(5, 5, 5, 0.16) 100%)",
+            backgroundClip: "text",
+            backgroundSize: "200% 100%",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
         >
           {/* Line 1: flush left */}
           <span className="block">

@@ -11,14 +11,16 @@ import Footer from "@/components/Footer";
 export default function Home() {
   return (
     <main>
-      <HeroSection />
-      <BioSection />
-      <AboutSection />
-      <CameraSection />
-      <ServicesSection />
-      <SelectedWorkSection />
-      <TestimonialsSection />
-      <NewsSection />
+      <div className="relative z-10 bg-[#f7f7f6]">
+        <HeroSection />
+        <BioSection />
+        <AboutSection />
+        <CameraSection />
+        <ServicesSection />
+        <SelectedWorkSection />
+        <TestimonialsSection />
+        <NewsSection />
+      </div>
       <Footer />
     </main>
   );

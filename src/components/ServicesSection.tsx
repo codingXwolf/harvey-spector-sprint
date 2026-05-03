@@ -31,7 +31,7 @@ const mobileDescription =
 
 export default function ServicesSection() {
   return (
-    <section className="bg-black text-white">
+    <section className="bg-black text-white" data-nav-theme="dark">
       <div className="px-[16px] py-[48px] md:min-h-[1280px] md:px-[32px] md:py-[82px]">
         <p
           className="text-[12px] leading-none md:text-[14px]"
@@ -53,16 +53,16 @@ export default function ServicesSection() {
           {services.map((service) => (
             <article
               key={service.number}
-              className="border-t border-white/80 pb-[47px] pt-[15px] md:grid md:min-h-[231px] md:grid-cols-[58%_29%_13%] md:gap-0 md:pb-0 md:pt-[10px]"
+              className="group cursor-pointer border-t border-white/80 pb-[47px] pt-[15px] transition-colors duration-300 hover:border-white md:grid md:min-h-[231px] md:grid-cols-[58%_29%_13%] md:gap-0 md:pb-0 md:pt-[10px]"
             >
               <div>
                 <p
-                  className="mb-[22px] text-[14px] leading-none md:mb-[21px] md:text-[14px]"
+                  className="mb-[22px] text-[14px] leading-none transition-opacity duration-300 group-hover:opacity-100 md:mb-[21px] md:text-[14px]"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
                   [ {service.number} ]
                 </p>
-                <h3 className="text-[33px] font-black italic uppercase leading-[0.9] tracking-[-0.04em] md:text-[34px]">
+                <h3 className="text-[33px] font-black italic uppercase leading-[0.9] tracking-[-0.04em] transition-transform duration-300 group-hover:translate-x-[10px] md:text-[34px]">
                   {service.title}
                 </h3>
               </div>

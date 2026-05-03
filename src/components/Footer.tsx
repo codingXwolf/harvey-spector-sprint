@@ -1,15 +1,23 @@
+import CtaButton from "@/components/CtaButton";
+
 export default function Footer() {
   return (
-    <footer className="overflow-hidden bg-black text-white">
-      <div className="relative min-h-[514px] px-[16px] pt-[49px] md:min-h-[514px] md:px-[32px] md:pt-[49px]">
+    <footer
+      className="relative z-0 h-[514px] bg-black text-white"
+      data-nav-theme="dark"
+    >
+      <div className="fixed bottom-0 left-0 right-0 z-0 min-h-[514px] overflow-hidden bg-black px-[16px] pt-[49px] md:min-h-[514px] md:px-[32px] md:pt-[49px]">
         <div className="md:flex md:justify-between">
           <div>
             <p className="text-[24px] italic leading-none tracking-[-0.05em] md:text-[25px]">
               HAVE A <strong className="not-italic">PROJECT</strong> IN MIND?
             </p>
-            <button className="mt-[16px] rounded-full border border-white px-[17px] py-[12px] text-[14px] leading-none md:mt-[15px]">
+            <CtaButton
+              variant="outline-light"
+              className="mt-[16px] px-[17px] py-[12px] md:mt-[15px]"
+            >
               Let&apos;s talk
-            </button>
+            </CtaButton>
           </div>
 
           <nav className="mt-[21px] flex flex-col gap-[17px] text-[18px] uppercase leading-none md:absolute md:left-[672px] md:top-[50px] md:mt-0 md:gap-[4px] md:text-[18px]">

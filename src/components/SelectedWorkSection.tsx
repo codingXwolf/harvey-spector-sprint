@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
+import CtaButton from "@/components/CtaButton";
 import {
   featuredPortfolioQuery,
   type PortfolioItem,
@@ -42,7 +43,7 @@ function ProjectCard({
   className?: string;
 }) {
   return (
-    <article className={className}>
+    <article className={`group cursor-pointer ${className}`}>
       <div className="relative aspect-[322/371] overflow-hidden bg-zinc-200 md:aspect-[606/671]">
         <Image
           src={project.imagePath}
@@ -51,15 +52,19 @@ function ProjectCard({
           quality={95}
           sizes="(min-width: 768px) 50vw, 100vw"
           style={{ objectPosition: project.objectPosition ?? "center" }}
-          className="object-cover"
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10"
         />
         <Tags tags={project.tags} />
       </div>
       <div className="mt-[10px] flex items-center justify-between gap-4 md:mt-[12px]">
-        <h3 className="text-[23px] font-black uppercase leading-none tracking-[-0.05em] md:text-[32px]">
+        <h3 className="text-[23px] font-black uppercase leading-none tracking-[-0.05em] transition-transform duration-300 group-hover:translate-x-[8px] md:text-[32px]">
           {project.title}
         </h3>
-        <ArrowIcon className="h-[26px] w-[26px] shrink-0 text-black md:h-[32px] md:w-[32px]" />
+        <ArrowIcon className="h-[26px] w-[26px] shrink-0 text-black transition-transform duration-300 group-hover:-translate-y-[4px] group-hover:translate-x-[4px] md:h-[32px] md:w-[32px]" />
       </div>
     </article>
   );
@@ -125,7 +130,7 @@ export default async function SelectedWorkSection() {
           })}
         </div>
 
-        <div className="relative mx-auto mt-[40px] max-w-[343px] px-[31px] py-[24px] text-center md:mx-0 md:mt-[60px] md:h-[103px] md:w-[410px] md:max-w-none md:px-[32px] md:py-[17px] md:text-left">
+        <div className="relative mt-[40px] w-full px-[31px] py-[24px] text-center md:mt-[60px] md:h-[103px] md:w-[410px] md:px-[32px] md:py-[17px] md:text-left">
           <span className="absolute left-0 top-0 h-[14px] w-[14px] border-l border-t border-black" />
           <span className="absolute right-0 top-0 h-[14px] w-[14px] border-r border-t border-black" />
           <span className="absolute bottom-0 left-0 h-[14px] w-[14px] border-b border-l border-black" />
@@ -135,9 +140,12 @@ export default async function SelectedWorkSection() {
             Discover how my creativity transforms ideas into impactful digital
             experiences — schedule a call with me to get started.
           </p>
-          <button className="mt-[16px] rounded-full bg-black px-[20px] py-[11px] text-[13px] leading-none text-white md:mt-[14px] md:px-[17px] md:py-[10px] md:text-[12px]">
+          <CtaButton
+            variant="dark"
+            className="mt-[16px] px-[20px] py-[11px] text-[13px] md:mt-[14px] md:px-[17px] md:py-[10px] md:text-[12px]"
+          >
             Let&apos;s talk
-          </button>
+          </CtaButton>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import CtaButton from "@/components/CtaButton";
 
 const navLinks = ["About", "Services", "Projects", "News", "Contact"];
 
@@ -27,9 +28,9 @@ export default function Navbar() {
       </div>
 
       {/* Desktop CTA */}
-      <button className="hidden md:flex items-center justify-center px-4 py-3 bg-black text-white text-[14px] font-medium tracking-[-0.04em] rounded-full hover:opacity-80 transition-opacity">
+      <CtaButton variant="dark" className="hidden md:inline-flex px-4 py-3 tracking-[-0.04em]">
         Let&apos;s talk
-      </button>
+      </CtaButton>
 
       {/* Mobile hamburger / close */}
       <button
@@ -82,9 +83,9 @@ export default function Navbar() {
               </a>
             ))}
           </div>
-          <button className="w-fit flex items-center justify-center px-4 py-3 bg-white text-black text-[14px] font-medium tracking-[-0.04em] rounded-full">
+          <CtaButton variant="light" className="w-fit px-4 py-3 tracking-[-0.04em]">
             Let&apos;s talk
-          </button>
+          </CtaButton>
         </div>
       )}
     </nav>
