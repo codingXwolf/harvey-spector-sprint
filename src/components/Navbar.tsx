@@ -5,11 +5,19 @@ import CtaButton from "@/components/CtaButton";
 
 const navLinks = ["About", "Services", "Projects", "News", "Contact"];
 
-export default function Navbar() {
+type NavbarProps = {
+  theme?: "light" | "dark";
+};
+
+export default function Navbar({ theme = "light" }: NavbarProps) {
   const [open, setOpen] = useState(false);
+  const isDark = theme === "dark";
+  const textClass = isDark ? "text-white" : "text-black";
+  const strokeColor = isDark ? "white" : "black";
+  const ctaVariant = isDark ? "outline-light" : "dark";
 
   return (
-    <nav className="flex items-center justify-between py-6 relative z-20">
+    <nav className={`flex items-center justify-between py-6 relative z-20 ${textClass}`}>
       <span className="font-semibold text-base capitalize tracking-[-0.04em]">
         H.Studio
       </span>
@@ -19,7 +27,7 @@ export default function Navbar() {
         {navLinks.map((link) => (
           <a
             key={link}
-            href={`#${link.toLowerCase()}`}
+            href={`${link.toLowerCase()}`}
             className="hover:opacity-60 transition-opacity"
           >
             {link}
@@ -28,7 +36,7 @@ export default function Navbar() {
       </div>
 
       {/* Desktop CTA */}
-      <CtaButton variant="dark" className="hidden md:inline-flex px-4 py-3 tracking-[-0.04em]">
+      <CtaButton variant={ctaVariant} className="hidden md:inline-flex px-4 py-3 tracking-[-0.04em]">
         Let&apos;s talk
       </CtaButton>
 
@@ -57,7 +65,7 @@ export default function Navbar() {
             height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="black"
+            stroke={strokeColor}
             strokeWidth="1.5"
             strokeLinecap="round"
           >

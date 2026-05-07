@@ -91,7 +91,7 @@ export default function HeroSection() {
     const mm = gsap.matchMedia();
 
     mm.add("(max-width: 767px)", () => {
-      gsap.set(bgRef.current, { scale: 1.7 });
+      gsap.set(bgRef.current, { scale: 1.35 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -105,11 +105,11 @@ export default function HeroSection() {
       tl.to(harveyMobileRef.current, { xPercent: -55, ease: "none" }, 0)
         .to(specterMobileRef.current, { xPercent: 55, ease: "none" }, 0)
         .to(helloRef.current, { xPercent: -55, ease: "none" }, 0)
-        .to(bgRef.current, { scale: 1.95, ease: "none" }, 0);
+        .to(bgRef.current, { scale: 1.55, ease: "none" }, 0);
     });
 
     mm.add("(min-width: 768px)", () => {
-      gsap.set(bgRef.current, { scale: 1.2 });
+      gsap.set(bgRef.current, { scale: 1.35 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -123,7 +123,7 @@ export default function HeroSection() {
       tl.to(harveyDesktopRef.current, { xPercent: -38, ease: "none" }, 0)
         .to(specterDesktopRef.current, { xPercent: 38, ease: "none" }, 0)
         .to(helloRef.current, { x: -220, ease: "none" }, 0)
-        .to(bgRef.current, { scale: 1.38, ease: "none" }, 0);
+        .to(bgRef.current, { scale: 1.5, ease: "none" }, 0);
     });
 
     return () => {
@@ -206,7 +206,10 @@ export default function HeroSection() {
       ref={sectionRef}
       className="relative h-screen min-h-[640px] overflow-hidden bg-[#d6d8d6]"
     >
-      <div ref={bgRef} className="absolute inset-0 z-10 will-change-transform">
+      <div
+        ref={bgRef}
+        className="absolute inset-0 z-10 will-change-transform md:left-[2%] md:right-[-15%]"
+      >
         <Image
           src="/hero-bg-photo.jpg"
           alt="Harvey Specter portrait"
@@ -214,7 +217,7 @@ export default function HeroSection() {
           priority
           quality={95}
           sizes="100vw"
-          className="object-cover [object-position:40%_40%] md:[object-position:50%_30%]"
+          className="object-cover [object-position:40%_10%] md:[object-position:70%_10%]"
         />
       </div>
 
