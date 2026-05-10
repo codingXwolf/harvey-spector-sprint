@@ -1,47 +1,93 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import type { NewsArticleSummary } from "@/sanity/lib/queries";
 
-const articles = [
-  {
-    image: "/maker.png",
-  },
-  {
-    image: "/eames.png",
-  },
-  {
-    image: "/books.png",
-  },
+type CardArticle = {
+  key: string;
+  image: string;
+  objectPosition?: string;
+  title?: string;
+  summary?: string;
+  href?: string;
+  external?: boolean;
+};
+
+const fallbackArticles: CardArticle[] = [
+  { key: "maker", image: "/maker.png" },
+  { key: "eames", image: "/eames.png" },
+  { key: "books", image: "/books.png" },
 ];
+
+function toCard(a: NewsArticleSummary): CardArticle {
+  const isExternal = !!a.externalUrl && /^https?:\/\//.test(a.externalUrl);
+  return {
+    key: a._id,
+    image: a.coverImage,
+    objectPosition: a.objectPosition,
+    title: a.title,
+    summary: a.summary,
+    href: isExternal ? a.externalUrl : `/news/${a.slug}`,
+    external: isExternal,
+  };
+}
 
 function NewsCard({
   article,
   className = "",
 }: {
-  article: (typeof articles)[number];
+  article: CardArticle;
   className?: string;
 }) {
-  return (
-    <article className={`w-[299px] shrink-0 md:w-[354px] ${className}`}>
+  const inner = (
+    <article className={`group w-[299px] shrink-0 md:w-[354px] ${className}`}>
       <div className="relative h-[398px] overflow-hidden bg-zinc-200 md:h-[471px]">
         <Image
           src={article.image}
-          alt="Latest news and achievements"
+          alt={article.title ?? "Latest news and achievements"}
           fill
           sizes="(min-width: 768px) 354px, 299px"
-          className="object-cover"
+          style={{ objectPosition: article.objectPosition ?? "center" }}
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
       </div>
-      <p className="mt-[18px] text-[16px] leading-[1.19] md:mt-[15px] md:text-[14px] md:leading-[1.2]">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+      {article.title ? (
+        <h3 className="mt-[18px] text-[18px] font-medium leading-[1.2] tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-[6px] md:mt-[15px] md:text-[18px]">
+          {article.title}
+        </h3>
+      ) : null}
+      <p className="mt-[10px] text-[16px] leading-[1.19] text-black/75 md:text-[14px] md:leading-[1.2]">
+        {article.summary ??
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
       </p>
     </article>
   );
+
+  if (!article.href) return inner;
+  if (article.external) {
+    return (
+      <a href={article.href} target="_blank" rel="noreferrer" className="block">
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={article.href} className="block">
+      {inner}
+    </Link>
+  );
 }
 
-export default function NewsSection() {
+export default function NewsSection({
+  items,
+}: {
+  items?: NewsArticleSummary[];
+}) {
+  const articles: CardArticle[] =
+    items && items.length > 0 ? items.slice(0, 3).map(toCard) : fallbackArticles;
+
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIdx, setActiveIdx] = useState(0);
@@ -97,7 +143,7 @@ export default function NewsSection() {
           >
             {articles.map((article, idx) => (
               <div
-                key={article.image}
+                key={article.key}
                 ref={(el) => {
                   if (el) el.dataset.idx = String(idx);
                   itemsRef.current[idx] = el;
@@ -112,7 +158,7 @@ export default function NewsSection() {
           <div className="mt-[20px] flex items-center justify-center gap-[8px]">
             {articles.map((a, idx) => (
               <button
-                key={a.image}
+                key={a.key}
                 type="button"
                 aria-label={`Go to article ${idx + 1}`}
                 onClick={() => goTo(idx)}
@@ -124,13 +170,28 @@ export default function NewsSection() {
           </div>
         </div>
 
-        {/* Desktop: original scattered absolute layout */}
+        {/* Desktop: scattered absolute layout */}
         <div className="hidden md:block">
-          <NewsCard article={articles[0]} className="md:absolute md:left-[388px] md:top-[125px]" />
+          {articles[0] ? (
+            <NewsCard
+              article={articles[0]}
+              className="md:absolute md:left-[388px] md:top-[125px]"
+            />
+          ) : null}
           <div className="md:absolute md:left-[772px] md:top-[125px] md:h-[702px] md:w-px md:bg-black/10" />
-          <NewsCard article={articles[1]} className="md:absolute md:left-[804px] md:top-[245px]" />
+          {articles[1] ? (
+            <NewsCard
+              article={articles[1]}
+              className="md:absolute md:left-[804px] md:top-[245px]"
+            />
+          ) : null}
           <div className="md:absolute md:left-[1188px] md:top-[125px] md:h-[702px] md:w-px md:bg-black/10" />
-          <NewsCard article={articles[2]} className="md:absolute md:left-[1220px] md:top-[125px]" />
+          {articles[2] ? (
+            <NewsCard
+              article={articles[2]}
+              className="md:absolute md:left-[1220px] md:top-[125px]"
+            />
+          ) : null}
         </div>
       </div>
     </section>
