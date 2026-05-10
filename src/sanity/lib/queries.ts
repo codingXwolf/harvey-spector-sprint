@@ -33,6 +33,70 @@ export type PortfolioItem = {
   href?: string
 }
 
+export const portfolioSlugsQuery = groq`
+  *[_type == "portfolio" && defined(slug.current)][].slug.current
+`
+
+export const projectBySlugQuery = groq`
+  *[_type == "portfolio" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    "imagePath": imagePath,
+    objectPosition,
+    tags,
+    href,
+    client,
+    year,
+    role,
+    summary,
+    body,
+    gallery[]{
+      imagePath,
+      caption,
+      objectPosition,
+      wide
+    },
+    "nextProject": nextProject->{
+      _id,
+      title,
+      "slug": slug.current,
+      "imagePath": imagePath,
+      objectPosition
+    }
+  }
+`
+
+export type ProjectGalleryImage = {
+  imagePath: string
+  caption?: string
+  objectPosition?: string
+  wide?: boolean
+}
+
+export type ProjectDetail = {
+  _id: string
+  title: string
+  slug: string
+  imagePath: string
+  objectPosition?: string
+  tags?: string[]
+  href?: string
+  client?: string
+  year?: number
+  role?: string[]
+  summary?: string
+  body?: string[]
+  gallery?: ProjectGalleryImage[]
+  nextProject?: {
+    _id: string
+    title: string
+    slug: string
+    imagePath: string
+    objectPosition?: string
+  }
+}
+
 export const servicesQuery = groq`
   *[_type == "service"] | order(order asc) {
     _id,
