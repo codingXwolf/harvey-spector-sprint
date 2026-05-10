@@ -134,3 +134,66 @@ export type ProcessStepItem = {
   duration?: string
   body?: string
 }
+
+export const allNewsQuery = groq`
+  *[_type == "newsArticle"] | order(date desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    date,
+    category,
+    "coverImage": coverImage,
+    objectPosition,
+    summary,
+    externalUrl
+  }
+`
+
+export const featuredNewsQuery = groq`
+  *[_type == "newsArticle" && featured == true] | order(date desc)[0...3] {
+    _id,
+    title,
+    "slug": slug.current,
+    date,
+    category,
+    "coverImage": coverImage,
+    objectPosition,
+    summary,
+    externalUrl
+  }
+`
+
+export const newsSlugsQuery = groq`
+  *[_type == "newsArticle" && defined(slug.current)][].slug.current
+`
+
+export const newsBySlugQuery = groq`
+  *[_type == "newsArticle" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    date,
+    category,
+    "coverImage": coverImage,
+    objectPosition,
+    summary,
+    body,
+    externalUrl
+  }
+`
+
+export type NewsArticleSummary = {
+  _id: string
+  title: string
+  slug: string
+  date: string
+  category?: string
+  coverImage: string
+  objectPosition?: string
+  summary?: string
+  externalUrl?: string
+}
+
+export type NewsArticle = NewsArticleSummary & {
+  body?: string[]
+}

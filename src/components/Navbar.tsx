@@ -8,6 +8,7 @@ const navLinks: { label: string; href: string }[] = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
+  { label: "News", href: "/news" },
 ];
 
 type NavbarProps = {
