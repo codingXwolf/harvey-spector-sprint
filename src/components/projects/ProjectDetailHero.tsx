@@ -83,26 +83,25 @@ export default function ProjectDetailHero({
   return (
     <section
       ref={sectionRef}
-      data-nav-theme="dark"
-      className="relative overflow-hidden bg-[#0e0e0e] text-white"
+      className="relative overflow-hidden bg-[#f7f7f6] text-black"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-[20%] left-1/2 h-[80%] w-[120%] -translate-x-1/2 opacity-60"
+        className="pointer-events-none absolute -top-[20%] left-1/2 h-[80%] w-[120%] -translate-x-1/2 opacity-50"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(255,255,255,0.07) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative z-20 px-[18px] md:px-[40px]">
-        <Navbar theme="dark" />
+        <Navbar theme="light" />
       </div>
 
       <div className="relative z-10 px-[18px] pb-[40px] pt-[24px] md:px-[40px] md:pb-[80px] md:pt-[48px]">
         <p
           ref={labelRef}
-          className="text-[12px] uppercase leading-none tracking-[0.16em] text-white/65 md:text-[14px]"
+          className="text-[12px] uppercase leading-none tracking-[0.16em] text-black/60 md:text-[14px]"
           style={{ fontFamily: "var(--font-geist-mono)" }}
         >
           [ PROJECT — CASE STUDY ]
@@ -143,7 +142,7 @@ export default function ProjectDetailHero({
         {project.summary ? (
           <p
             ref={summaryRef}
-            className="mt-[40px] max-w-[60ch] text-[16px] leading-[1.5] text-white/85 md:mt-[60px] md:text-[20px]"
+            className="mt-[40px] max-w-[60ch] text-[16px] leading-[1.5] text-black/75 md:mt-[60px] md:text-[20px]"
           >
             {project.summary}
           </p>
@@ -152,7 +151,7 @@ export default function ProjectDetailHero({
 
       <div
         ref={imageWrapRef}
-        className="relative z-10 mx-[18px] mb-[80px] aspect-[4/5] overflow-hidden bg-zinc-800 md:mx-[40px] md:mb-[120px] md:aspect-[16/9]"
+        className="relative z-10 mx-[18px] mb-[80px] aspect-[4/5] overflow-hidden bg-zinc-200 md:mx-[40px] md:mb-[120px] md:aspect-[16/9]"
       >
         <div ref={imageRef} className="absolute inset-[-6%]">
           <Image
@@ -175,13 +174,13 @@ function MetaCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="md:col-span-3">
       <p
-        className="text-[11px] uppercase leading-none tracking-[0.16em] text-white/45 md:text-[12px]"
+        className="text-[11px] uppercase leading-none tracking-[0.16em] text-black/45 md:text-[12px]"
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         {label}
       </p>
       <p
-        className="mt-[10px] text-[15px] leading-[1.35] text-white md:mt-[14px] md:text-[16px]"
+        className="mt-[10px] text-[15px] leading-[1.35] text-black md:mt-[14px] md:text-[16px]"
         style={{ fontFamily: "var(--font-inter)" }}
       >
         {value}

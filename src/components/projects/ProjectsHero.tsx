@@ -62,20 +62,19 @@ export default function ProjectsHero({ count }: { count: number }) {
   return (
     <section
       ref={sectionRef}
-      data-nav-theme="dark"
-      className="relative min-h-screen overflow-hidden bg-[#0e0e0e] text-white"
+      className="relative min-h-screen overflow-hidden bg-[#f7f7f6] text-black"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-[20%] left-1/2 h-[80%] w-[120%] -translate-x-1/2 opacity-60"
+        className="pointer-events-none absolute -top-[20%] left-1/2 h-[80%] w-[120%] -translate-x-1/2 opacity-50"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(255,255,255,0.07) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative z-20 px-[18px] md:px-[40px]">
-        <Navbar theme="dark" />
+        <Navbar theme="light" />
       </div>
 
       <div className="relative z-10 flex min-h-[calc(100vh-96px)] flex-col px-[18px] pb-[40px] md:px-[40px] md:pb-[56px]">
@@ -121,7 +120,7 @@ export default function ProjectsHero({ count }: { count: number }) {
           <div className="md:col-span-5">
             <p
               ref={subRef}
-              className="text-[15px] leading-[1.45] text-white/85 md:text-[18px]"
+              className="text-[15px] leading-[1.45] text-black/75 md:text-[18px]"
             >
               A working archive of brands, products, and stories shipped from
               the studio. Some recent, some old enough to be embarrassing — all

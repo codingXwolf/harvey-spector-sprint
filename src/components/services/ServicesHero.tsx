@@ -54,21 +54,20 @@ export default function ServicesHero() {
   return (
     <section
       ref={sectionRef}
-      data-nav-theme="dark"
-      className="relative min-h-screen overflow-hidden bg-[#0e0e0e] text-white"
+      className="relative min-h-screen overflow-hidden bg-[#f7f7f6] text-black"
     >
       {/* Soft radial glow */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -top-[20%] left-1/2 h-[80%] w-[120%] -translate-x-1/2 opacity-60"
+        className="pointer-events-none absolute -top-[20%] left-1/2 h-[80%] w-[120%] -translate-x-1/2 opacity-50"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(255,255,255,0.07) 0%, transparent 60%)",
+            "radial-gradient(ellipse at center, rgba(0,0,0,0.05) 0%, transparent 60%)",
         }}
       />
 
       <div className="relative z-20 px-[18px] md:px-[40px]">
-        <Navbar theme="dark" />
+        <Navbar theme="light" />
       </div>
 
       <div className="relative z-10 flex min-h-[calc(100vh-96px)] flex-col px-[18px] pb-[40px] md:px-[40px] md:pb-[56px]">
@@ -118,7 +117,7 @@ export default function ServicesHero() {
           <div className="md:col-span-5">
             <p
               ref={subRef}
-              className="text-[15px] leading-[1.45] text-white/85 md:text-[18px]"
+              className="text-[15px] leading-[1.45] text-black/75 md:text-[18px]"
             >
               From the first brand mark to the last shipped pixel — we run the
               full arc of identity, product, and story so nothing gets lost in
@@ -127,7 +126,7 @@ export default function ServicesHero() {
           </div>
 
           <ul
-            className="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-y-[14px] gap-x-[24px] text-[14px] uppercase leading-none tracking-[0.16em] text-white/70 md:text-[15px]"
+            className="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-y-[14px] gap-x-[24px] text-[14px] uppercase leading-none tracking-[0.16em] text-black/65 md:text-[15px]"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             {disciplines.map((d, i) => (
@@ -136,10 +135,10 @@ export default function ServicesHero() {
                 ref={setDisciplineRef(i)}
                 className="flex items-baseline gap-[10px]"
               >
-                <span className="text-white/40">
+                <span className="text-black/35">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <span className="text-white">{d}</span>
+                <span className="text-black">{d}</span>
               </li>
             ))}
           </ul>
