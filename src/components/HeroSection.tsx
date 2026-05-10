@@ -1,17 +1,22 @@
 'use client'
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CtaButton from "@/components/CtaButton";
 
-const navLinks = ["About", "Services", "Projects", "News", "Contact"];
+const navLinks: { label: string; href: string }[] = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
 // Animated nav link with an underline that wipes in on hover.
-function NavLink({ label }: { label: string }) {
+function NavLink({ label, href }: { label: string; href: string }) {
   const underlineRef = useRef<HTMLSpanElement | null>(null);
 
   const onEnter = () => {
@@ -33,8 +38,8 @@ function NavLink({ label }: { label: string }) {
   };
 
   return (
-    <a
-      href={`#${label.toLowerCase()}`}
+    <Link
+      href={href}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       className="relative inline-block"
@@ -45,7 +50,7 @@ function NavLink({ label }: { label: string }) {
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-[2px] left-0 right-0 block h-[1.5px] origin-left bg-current scale-x-0"
       />
-    </a>
+    </Link>
   );
 }
 
@@ -282,16 +287,16 @@ export default function HeroSection() {
           navOnDark ? "text-white" : "text-black"
         }`}
       >
-        <a
-          href="#"
+        <Link
+          href="/"
           className="text-[18px] font-semibold leading-none tracking-[-0.04em]"
         >
           H.Studio
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-[42px] text-[15px] font-medium leading-none md:flex">
           {navLinks.map((link) => (
-            <NavLink key={link} label={link} />
+            <NavLink key={link.label} label={link.label} href={link.href} />
           ))}
         </div>
 
@@ -322,12 +327,13 @@ export default function HeroSection() {
         aria-hidden={!menuOpen}
       >
         <div className="flex items-center justify-between px-[18px] py-[24px]">
-          <a
-            href="#"
+          <Link
+            href="/"
+            onClick={() => setMenuOpen(false)}
             className="text-[18px] font-semibold leading-none tracking-[-0.04em] text-white"
           >
             H.Studio
-          </a>
+          </Link>
           <button
             type="button"
             aria-label="Close menu"
@@ -341,17 +347,17 @@ export default function HeroSection() {
         <ul className="flex flex-1 flex-col items-center justify-center gap-[28px] text-[28px] font-medium">
           {navLinks.map((link, idx) => (
             <li
-              key={link}
+              key={link.label}
               ref={(el) => {
                 if (el) linksRef.current[idx] = el;
               }}
             >
-              <a
-                href={`#${link.toLowerCase()}`}
+              <Link
+                href={link.href}
                 onClick={() => setMenuOpen(false)}
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             </li>
           ))}
           <li

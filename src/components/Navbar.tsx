@@ -1,9 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import CtaButton from "@/components/CtaButton";
 
-const navLinks = ["About", "Services", "Projects", "News", "Contact"];
+const navLinks: { label: string; href: string }[] = [
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
+];
 
 type NavbarProps = {
   theme?: "light" | "dark";
@@ -18,20 +23,23 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
 
   return (
     <nav className={`flex items-center justify-between py-6 relative z-20 ${textClass}`}>
-      <span className="font-semibold text-base capitalize tracking-[-0.04em]">
+      <Link
+        href="/"
+        className="font-semibold text-base capitalize tracking-[-0.04em]"
+      >
         H.Studio
-      </span>
+      </Link>
 
       {/* Desktop nav links */}
       <div className="hidden md:flex items-center gap-14 font-semibold text-base capitalize tracking-[-0.04em]">
         {navLinks.map((link) => (
-          <a
-            key={link}
-            href={`${link.toLowerCase()}`}
+          <Link
+            key={link.label}
+            href={link.href}
             className="hover:opacity-60 transition-opacity"
           >
-            {link}
-          </a>
+            {link.label}
+          </Link>
         ))}
       </div>
 
@@ -81,14 +89,14 @@ export default function Navbar({ theme = "light" }: NavbarProps) {
         <div className="md:hidden fixed inset-0 z-40 bg-black flex flex-col px-6 pt-24 pb-12">
           <div className="flex flex-col gap-8 flex-1">
             {navLinks.map((link) => (
-              <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
+              <Link
+                key={link.label}
+                href={link.href}
                 className="text-white text-4xl font-semibold capitalize tracking-[-0.04em] hover:opacity-60 transition-opacity"
                 onClick={() => setOpen(false)}
               >
-                {link}
-              </a>
+                {link.label}
+              </Link>
             ))}
           </div>
           <CtaButton variant="light" className="w-fit px-4 py-3 tracking-[-0.04em]">
