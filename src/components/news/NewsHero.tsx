@@ -94,7 +94,7 @@ export default function NewsHero({ count }: { count: number }) {
         </div>
 
         <h1
-          className="mt-auto text-[72px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:text-[clamp(120px,_15vw,_220px)]"
+          className="mt-auto text-center text-[72px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:text-left md:text-[clamp(120px,_15vw,_220px)]"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
         >
           <span className="block overflow-hidden">
@@ -117,7 +117,7 @@ export default function NewsHero({ count }: { count: number }) {
           <div className="md:col-span-5">
             <p
               ref={subRef}
-              className="text-[15px] leading-[1.45] text-black/75 md:text-[18px]"
+              className="mx-auto max-w-[40ch] text-center text-[15px] leading-[1.45] text-black/75 md:mx-0 md:max-w-none md:text-left md:text-[18px]"
             >
               Press, awards, launches, and the occasional studio note. The
               short version of what we&apos;ve been up to lately.

@@ -87,19 +87,19 @@ function NewsCard({
       </div>
 
       <div
-        className="mt-[16px] flex items-baseline justify-between gap-[12px] text-[12px] uppercase leading-none tracking-[0.16em] text-black/55 md:mt-[18px] md:text-[13px]"
+        className="mt-[12px] flex items-baseline justify-between gap-[8px] text-[10px] uppercase leading-none tracking-[0.14em] text-black/55 md:mt-[18px] md:gap-[12px] md:text-[13px] md:tracking-[0.16em]"
         style={{ fontFamily: "var(--font-geist-mono)" }}
       >
         <span>{formatDate(article.date)}</span>
         {article.category ? <span>{article.category}</span> : null}
       </div>
 
-      <h3 className="mt-[12px] text-[22px] font-medium leading-[1.15] tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-[6px] md:text-[26px]">
+      <h3 className="mt-[8px] text-[15px] font-medium leading-[1.2] tracking-[-0.02em] transition-transform duration-300 group-hover:translate-x-[6px] md:mt-[12px] md:text-[26px] md:leading-[1.15]">
         {article.title}
       </h3>
 
       {article.summary ? (
-        <p className="mt-[12px] text-[15px] leading-[1.45] text-black/70 md:text-[16px]">
+        <p className="mt-[8px] hidden text-[13px] leading-[1.45] text-black/70 md:mt-[12px] md:block md:text-[16px]">
           {article.summary}
         </p>
       ) : null}
@@ -375,9 +375,9 @@ export default function NewsList({ items }: { items: NewsArticleSummary[] }) {
         </p>
       ) : (
         <>
-          {/* Mobile: vertical stagger */}
+          {/* Mobile: 2-column compact grid */}
           <div className="px-[16px] pb-[100px] md:hidden">
-            <div className="grid gap-x-[16px] gap-y-[48px]">
+            <div className="grid grid-cols-2 gap-x-[12px] gap-y-[36px]">
               {filtered.map((article, i) => (
                 <div key={article._id} ref={setMobileCardRef(i)}>
                   <NewsCard article={article} index={i} />
