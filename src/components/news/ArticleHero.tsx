@@ -49,6 +49,23 @@ export default function ArticleHero({ article }: { article: NewsArticle }) {
         .from(summaryRef.current, { autoAlpha: 0, y: 16, duration: 0.6 }, "-=0.4")
         .from(imageWrapRef.current, { autoAlpha: 0, y: 40, duration: 0.9 }, "-=0.5");
 
+      // Scroll: title splits horizontally — first word left, last word right.
+      if (titleRefs.current.length > 1) {
+        const first = titleRefs.current[0];
+        const last = titleRefs.current[titleRefs.current.length - 1];
+        const split = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        split
+          .to(first, { xPercent: -22, ease: "none" }, 0)
+          .to(last, { xPercent: 22, ease: "none" }, 0);
+      }
+
       if (imageRef.current && imageWrapRef.current) {
         gsap.fromTo(
           imageRef.current,

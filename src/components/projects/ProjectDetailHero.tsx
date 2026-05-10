@@ -57,6 +57,23 @@ export default function ProjectDetailHero({
           "-=0.5"
         );
 
+      // Scroll: title splits horizontally — first word left, last word right.
+      if (titleRefs.current.length > 1) {
+        const first = titleRefs.current[0];
+        const last = titleRefs.current[titleRefs.current.length - 1];
+        const split = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+        split
+          .to(first, { xPercent: -22, ease: "none" }, 0)
+          .to(last, { xPercent: 22, ease: "none" }, 0);
+      }
+
       // Subtle parallax on the hero image as you scroll past.
       if (imageRef.current && imageWrapRef.current) {
         gsap.fromTo(

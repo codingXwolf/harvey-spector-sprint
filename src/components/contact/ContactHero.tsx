@@ -34,6 +34,19 @@ export default function ContactHero() {
           "-=0.7"
         )
         .from(subRef.current, { autoAlpha: 0, y: 16, duration: 0.6 }, "-=0.4");
+
+      // Scroll: headline lines split apart horizontally (home page pattern).
+      const split = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+      split
+        .to(headlineRefs.current[0], { xPercent: -28, ease: "none" }, 0)
+        .to(headlineRefs.current[1], { xPercent: 22, ease: "none" }, 0);
     }, sectionRef);
     return () => ctx.revert();
   }, []);
