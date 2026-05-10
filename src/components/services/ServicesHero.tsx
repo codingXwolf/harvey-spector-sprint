@@ -47,19 +47,30 @@ export default function ServicesHero() {
           "-=0.4"
         );
 
-      // Scroll: headline lines split apart horizontally (home page pattern).
-      const split = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: 1,
+      // Scroll: headline lines fly off the screen (home page pattern).
+      const mm = gsap.matchMedia();
+      mm.add(
+        {
+          isDesktop: "(min-width: 768px)",
+          isMobile: "(max-width: 767px)",
         },
-      });
-      split
-        .to(headlineRefs.current[0], { xPercent: -28, ease: "none" }, 0)
-        .to(headlineRefs.current[1], { xPercent: 18, ease: "none" }, 0)
-        .to(headlineRefs.current[2], { xPercent: -22, ease: "none" }, 0);
+        (ctx2) => {
+          const isMobile = !!ctx2.conditions?.isMobile;
+          const xLeft = isMobile ? -75 : -55;
+          const xRight = isMobile ? 75 : 55;
+          const split = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+          split
+            .to(headlineRefs.current[0], { xPercent: xLeft, ease: "none" }, 0)
+            .to(headlineRefs.current[2], { xPercent: xRight, ease: "none" }, 0);
+        }
+      );
     }, sectionRef);
 
     return () => ctx.revert();
