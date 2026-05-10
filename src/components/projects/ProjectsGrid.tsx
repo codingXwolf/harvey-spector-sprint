@@ -90,20 +90,26 @@ function ProjectCard({ project }: { project: PortfolioItem }) {
     </article>
   );
 
+  if (project.href && /^https?:\/\//.test(project.href)) {
+    return (
+      <a
+        href={project.href}
+        target="_blank"
+        rel="noreferrer"
+        className="block"
+      >
+        {card}
+      </a>
+    );
+  }
+  if (project.slug) {
+    return (
+      <Link href={`/projects/${project.slug}`} className="block">
+        {card}
+      </Link>
+    );
+  }
   if (project.href) {
-    const isExternal = /^https?:\/\//.test(project.href);
-    if (isExternal) {
-      return (
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noreferrer"
-          className="block"
-        >
-          {card}
-        </a>
-      );
-    }
     return (
       <Link href={project.href} className="block">
         {card}
