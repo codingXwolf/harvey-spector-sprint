@@ -68,6 +68,7 @@ export default function ServicesHero() {
           });
           split
             .to(headlineRefs.current[0], { xPercent: xLeft, ease: "none" }, 0)
+            .to(headlineRefs.current[1], { xPercent: xLeft, ease: "none" }, 0)
             .to(headlineRefs.current[2], { xPercent: xRight, ease: "none" }, 0);
         }
       );
