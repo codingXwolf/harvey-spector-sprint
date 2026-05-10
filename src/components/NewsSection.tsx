@@ -23,33 +23,20 @@ function NewsCard({
   className?: string;
 }) {
   return (
-    <article className={`group w-[299px] shrink-0 cursor-pointer md:w-[354px] ${className}`}>
+    <article className={`w-[299px] shrink-0 md:w-[354px] ${className}`}>
       <div className="relative h-[398px] overflow-hidden bg-zinc-200 md:h-[471px]">
         <Image
           src={article.image}
           alt="Latest news and achievements"
           fill
           sizes="(min-width: 768px) 354px, 299px"
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-black/0 transition-colors duration-500 group-hover:bg-black/10"
+          className="object-cover"
         />
       </div>
-      <p className="mt-[18px] text-[16px] leading-[1.19] transition-transform duration-300 group-hover:translate-x-[8px] md:mt-[15px] md:text-[14px] md:leading-[1.2]">
+      <p className="mt-[18px] text-[16px] leading-[1.19] md:mt-[15px] md:text-[14px] md:leading-[1.2]">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </p>
-      <a
-        href="#"
-        className="mt-[25px] inline-flex items-center gap-[15px] border-b border-black pb-[3px] text-[16px] font-medium leading-none transition-transform duration-300 group-hover:translate-x-[8px] md:mt-[25px] md:text-[14px]"
-      >
-        Read more{" "}
-        <span className="text-[14px] transition-transform duration-300 group-hover:-translate-y-[3px] group-hover:translate-x-[3px]">
-          ↗
-        </span>
-      </a>
     </article>
   );
 }

@@ -11,9 +11,22 @@ export const featuredPortfolioQuery = groq`
   }
 `
 
+export const allPortfolioQuery = groq`
+  *[_type == "portfolio"] | order(order asc) {
+    _id,
+    title,
+    "slug": slug.current,
+    "imagePath": imagePath,
+    objectPosition,
+    tags,
+    href
+  }
+`
+
 export type PortfolioItem = {
   _id: string
   title: string
+  slug?: string
   imagePath: string
   objectPosition?: string
   tags?: string[]
