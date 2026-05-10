@@ -12,6 +12,7 @@ const navLinks: { label: string; href: string }[] = [
   { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "News", href: "/news" },
+  { label: "Contact", href: "/contact" },
 ];
 
 gsap.registerPlugin(ScrollTrigger);
