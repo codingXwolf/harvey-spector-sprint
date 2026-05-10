@@ -77,7 +77,7 @@ export default function ProjectsHero({ count }: { count: number }) {
         <Navbar theme="light" />
       </div>
 
-      <div className="relative z-10 flex min-h-[calc(100vh-96px)] flex-col px-[18px] pb-[40px] md:px-[40px] md:pb-[56px]">
+      <div className="relative z-10 flex flex-col px-[18px] pb-[60px] md:min-h-[calc(100vh-96px)] md:px-[40px] md:pb-[56px]">
         <div className="flex items-start justify-between pt-[24px] md:pt-[48px]">
           <p
             ref={labelRef}
@@ -97,7 +97,7 @@ export default function ProjectsHero({ count }: { count: number }) {
         </div>
 
         <h1
-          className="mt-auto text-[72px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:text-[clamp(120px,_15vw,_220px)]"
+          className="mt-[96px] text-center text-[96px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:mt-auto md:text-left md:text-[clamp(120px,_15vw,_220px)]"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
         >
           <span className="block overflow-hidden">
@@ -120,7 +120,7 @@ export default function ProjectsHero({ count }: { count: number }) {
           <div className="md:col-span-5">
             <p
               ref={subRef}
-              className="text-[15px] leading-[1.45] text-black/75 md:text-[18px]"
+              className="mx-auto max-w-[40ch] text-center text-[17px] leading-[1.5] text-black/75 md:mx-0 md:max-w-none md:text-left md:text-[18px]"
             >
               A working archive of brands, products, and stories shipped from
               the studio. Some recent, some old enough to be embarrassing — all

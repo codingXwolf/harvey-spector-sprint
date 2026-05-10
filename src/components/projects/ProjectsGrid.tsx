@@ -62,7 +62,7 @@ function ProjectCard({
 
   const titleSizeClass = horizontal
     ? "text-[24px] md:text-[28px]"
-    : "text-[24px] md:text-[34px]";
+    : "text-[16px] md:text-[34px]";
 
   const card = (
     <article className="group h-full">
@@ -406,9 +406,9 @@ export default function ProjectsGrid({ items }: { items: PortfolioItem[] }) {
         </p>
       ) : (
         <>
-          {/* Mobile: vertical staggered grid */}
+          {/* Mobile: 2-column compact grid */}
           <div className="px-[16px] pb-[100px] md:hidden">
-            <div className="grid gap-x-[16px] gap-y-[48px]">
+            <div className="grid grid-cols-2 gap-x-[12px] gap-y-[36px]">
               {filtered.map((project, i) => (
                 <div key={project._id} ref={setMobileCardRef(i)}>
                   <ProjectCard project={project} index={i} />
