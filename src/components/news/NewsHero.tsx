@@ -94,7 +94,7 @@ export default function NewsHero({ count }: { count: number }) {
         </div>
 
         <h1
-          className="mt-[48px] text-center text-[96px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:mt-auto md:text-left md:text-[clamp(120px,_15vw,_220px)]"
+          className="mt-[96px] text-center text-[96px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:mt-auto md:text-left md:text-[clamp(120px,_15vw,_220px)]"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
         >
           <span className="block overflow-hidden">
