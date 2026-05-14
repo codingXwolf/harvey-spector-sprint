@@ -26,7 +26,7 @@ export default function AboutHero() {
     const ctx = gsap.context(() => {
       // Initial zoom on the bg image so the scroll zoom continues outward.
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      gsap.set(bgRef.current, isMobile ? { scale: 1.35, yPercent: 8, xPercent: 18 } : { scale: 1 });
+      gsap.set(bgRef.current, isMobile ? { scale: 1.35, x: 90 } : { scale: 1 });
 
       // Staggered reveal of the three headline lines.
       const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -67,11 +67,11 @@ export default function AboutHero() {
     <section
       ref={sectionRef}
       data-nav-theme="dark"
-      className="relative h-screen min-h-[680px] overflow-hidden bg-black text-white"
+      className="relative left-0 right-0 h-screen w-screen min-h-[680px] overflow-hidden bg-black text-white"
     >
       <div
         ref={bgRef}
-        className="absolute inset-0 z-0 will-change-transform md:left-[2%] md:right-[-15%]"
+        className="absolute inset-0 z-0 will-change-transform md:right-[-15%]"
       >
         <Image
           src="/hero-bg-photo.jpg"
@@ -80,7 +80,7 @@ export default function AboutHero() {
           priority
           quality={95}
           sizes="100vw"
-          className="object-cover [object-position:50%_0%] md:[object-position:70%_10%]"
+          className="object-cover [object-position:50%_50%] md:[object-position:70%_10%]"
         />
         <div
           aria-hidden="true"

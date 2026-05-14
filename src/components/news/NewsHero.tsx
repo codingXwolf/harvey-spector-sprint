@@ -99,7 +99,7 @@ export default function NewsHero({ count }: { count: number }) {
         <Navbar theme="light" />
       </div>
 
-      <div className="relative z-10 flex flex-col px-[18px] pb-[60px] md:min-h-[calc(100vh-96px)] md:px-[40px] md:pb-[56px]">
+      <div className="relative z-10 flex flex-col px-[18px] pb-0 md:min-h-[calc(100vh-96px)] md:px-[40px] md:pb-[56px]">
         <div className="flex items-start justify-between pt-[24px] md:pt-[48px]">
           <p
             ref={labelRef}

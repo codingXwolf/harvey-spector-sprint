@@ -98,29 +98,33 @@ export default function ProcessSection({ items }: { items?: Step[] }) {
             <div
               key={s.title}
               ref={setStepRef(i)}
-              className="border-t border-white/20 pt-[20px] md:pt-[24px]"
+              className="group/phase relative pt-[20px] transition-transform duration-500 ease-out hover:-translate-y-1 md:pt-[24px]"
             >
+              <span
+                aria-hidden="true"
+                className="absolute left-0 right-0 top-0 h-px origin-left scale-x-100 bg-white/20 transition-colors duration-500 group-hover/phase:bg-white"
+              />
               <div className="flex items-baseline justify-between">
                 <span
-                  className="text-[12px] uppercase leading-none tracking-[0.16em] text-white/60 md:text-[13px]"
+                  className="text-[12px] uppercase leading-none tracking-[0.16em] text-white/60 transition-colors duration-300 group-hover/phase:text-white md:text-[13px]"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
                   {s.number}
                 </span>
                 <span
-                  className="text-[11px] uppercase leading-none tracking-[0.16em] text-white/45 md:text-[12px]"
+                  className="text-[11px] uppercase leading-none tracking-[0.16em] text-white/45 transition-colors duration-300 group-hover/phase:text-white/80 md:text-[12px]"
                   style={{ fontFamily: "var(--font-geist-mono)" }}
                 >
                   {s.duration}
                 </span>
               </div>
               <h3
-                className="mt-[18px] text-[24px] font-medium leading-[1.05] tracking-[-0.03em] md:text-[28px]"
+                className="mt-[18px] text-[24px] font-medium leading-[1.05] tracking-[-0.03em] transition-transform duration-500 ease-out group-hover/phase:translate-x-[4px] md:text-[28px]"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {s.title}
               </h3>
-              <p className="mt-[14px] text-[14px] leading-[1.55] text-white/75 md:text-[15px]">
+              <p className="mt-[14px] text-[14px] leading-[1.55] text-white/75 transition-colors duration-300 group-hover/phase:text-white md:text-[15px]">
                 {s.body}
               </p>
             </div>

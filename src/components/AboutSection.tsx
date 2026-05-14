@@ -15,7 +15,8 @@ export default function AboutSection() {
 
   useLayoutEffect(() => {
     const overlays = [mobileOverlayRef.current, desktopOverlayRef.current];
-    const textCards = [mobileTextCardRef.current, desktopTextCardRef.current];
+    // Only the desktop card slides — mobile stays put.
+    const textCards = [desktopTextCardRef.current];
 
     const tweens = overlays
       .filter((overlay): overlay is HTMLDivElement => Boolean(overlay))

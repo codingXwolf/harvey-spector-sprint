@@ -52,7 +52,7 @@ export default function CameraSection() {
         className="absolute -inset-y-[8%] left-0 right-0 will-change-transform"
       >
         <Image
-          src="/service-brand.jpg"
+          src="/camera-section.jpg"
           alt="Photographer holding a camera"
           fill
           priority

@@ -307,7 +307,7 @@ export default function NewsList({ items }: { items: NewsArticleSummary[] }) {
 
   return (
     <section ref={sectionRef} className="bg-[#f7f7f6] text-black">
-      <div className="px-[16px] pb-[40px] pt-[80px] md:px-[28px] md:pb-[60px] md:pt-[120px]">
+      <div className="px-[16px] pb-[40px] pt-0 md:px-[28px] md:pb-[60px] md:pt-[120px]">
         <div ref={headerRef} className="flex items-start justify-between">
           <p
             className="text-[12px] uppercase leading-none tracking-[0.16em] md:text-[14px]"

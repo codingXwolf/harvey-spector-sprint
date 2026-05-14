@@ -104,7 +104,7 @@ export default function ServicesList({ items }: { items?: Service[] }) {
       ref={sectionRef}
       className="bg-[#f7f7f6] text-black"
     >
-      <div className="px-[18px] py-[100px] md:px-[40px] md:py-[160px]">
+      <div className="px-[18px] pb-[100px] pt-[12px] md:px-[40px] md:py-[160px]">
         <div className="flex items-start justify-between">
           <p
             className="text-[12px] uppercase leading-none tracking-[0.16em] md:text-[14px]"

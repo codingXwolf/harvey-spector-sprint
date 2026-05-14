@@ -96,7 +96,7 @@ export default function ServicesHero() {
         <Navbar theme="light" />
       </div>
 
-      <div className="relative z-10 flex min-h-[calc(100vh-96px)] flex-col px-[18px] pb-[40px] md:px-[40px] md:pb-[56px]">
+      <div className="relative z-10 flex flex-col px-[18px] pb-[8px] md:min-h-[calc(100vh-96px)] md:px-[40px] md:pb-[56px]">
         <div className="flex items-start justify-between pt-[24px] md:pt-[48px]">
           <p
             ref={labelRef}
@@ -115,7 +115,7 @@ export default function ServicesHero() {
         </div>
 
         <h1
-          className="mt-auto text-[72px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:text-[clamp(120px,_15vw,_220px)]"
+          className="mt-[96px] text-center text-[80px] font-medium capitalize leading-[0.88] tracking-[-0.06em] md:mt-auto md:text-left md:text-[clamp(120px,_15vw,_220px)]"
           style={{ fontFamily: "var(--font-inter)", fontWeight: 500 }}
         >
           <span className="block overflow-hidden">
@@ -143,7 +143,7 @@ export default function ServicesHero() {
           <div className="md:col-span-5">
             <p
               ref={subRef}
-              className="text-[15px] leading-[1.45] text-black/75 md:text-[18px]"
+              className="mx-auto max-w-[40ch] text-center text-[17px] leading-[1.5] text-black/75 md:mx-0 md:max-w-none md:text-left md:text-[18px]"
             >
               From the first brand mark to the last shipped pixel — we run the
               full arc of identity, product, and story so nothing gets lost in
@@ -152,7 +152,7 @@ export default function ServicesHero() {
           </div>
 
           <ul
-            className="md:col-span-6 md:col-start-7 grid grid-cols-2 gap-y-[14px] gap-x-[24px] text-[14px] uppercase leading-none tracking-[0.16em] text-black/65 md:text-[15px]"
+            className="mx-auto grid max-w-[320px] grid-cols-2 justify-items-center gap-y-[14px] gap-x-[24px] text-[14px] uppercase leading-none tracking-[0.16em] text-black/65 md:mx-0 md:max-w-none md:justify-items-start md:col-span-6 md:col-start-7 md:text-[15px]"
             style={{ fontFamily: "var(--font-geist-mono)" }}
           >
             {disciplines.map((d, i) => (

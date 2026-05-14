@@ -344,7 +344,18 @@ export default function ProjectsGrid({ items }: { items: PortfolioItem[] }) {
 
   // When the active tag changes, jump back to the section top so the user actually
   // sees the new results instead of being stranded inside the prior pin's range.
+  // Skip on initial mount — only run on subsequent filter changes.
+  const didMountRef = useRef(false);
   useLayoutEffect(() => {
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      // First mount: make sure the page actually starts at the very top of
+      // the document instead of any restored scroll position from navigation.
+      if (typeof window !== "undefined") {
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+      return;
+    }
     if (!sectionRef.current) return;
     if (typeof window === "undefined") return;
     const top = sectionRef.current.getBoundingClientRect().top + window.scrollY;
@@ -353,7 +364,7 @@ export default function ProjectsGrid({ items }: { items: PortfolioItem[] }) {
 
   return (
     <section ref={sectionRef} className="bg-[#f7f7f6] text-black">
-      <div className="px-[16px] pb-[40px] pt-[80px] md:px-[28px] md:pb-[60px] md:pt-[120px]">
+      <div className="px-[16px] pb-[40px] pt-0 md:px-[28px] md:pb-[60px] md:pt-[120px]">
         <div ref={headerRef} className="flex items-start justify-between">
           <p
             className="text-[12px] uppercase leading-none tracking-[0.16em] md:text-[14px]"
