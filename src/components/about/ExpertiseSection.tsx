@@ -49,25 +49,26 @@ export default function ExpertiseSection() {
           {expertise.map((e, idx) => (
             <article
               key={e.title}
-              className="border-black/15 pt-[24px] sm:[&:not(:first-child)]:md:border-l sm:[&:not(:first-child)]:md:pl-[24px]"
+              className="group/exp relative border-black/15 pt-[24px] transition-transform duration-500 ease-out hover:-translate-y-1 sm:[&:not(:first-child)]:md:border-l sm:[&:not(:first-child)]:md:pl-[24px]"
             >
               <p
-                className="text-[12px] uppercase leading-none tracking-[0.16em] text-black/55 md:text-[13px]"
+                className="text-[12px] uppercase leading-none tracking-[0.16em] text-black/55 transition-colors duration-300 group-hover/exp:text-black md:text-[13px]"
                 style={{ fontFamily: "var(--font-geist-mono)" }}
               >
                 [ 0{idx + 1} ]
               </p>
               <h3
-                className="mt-[20px] text-[22px] font-medium leading-[1.1] tracking-[-0.03em] md:mt-[28px] md:text-[24px]"
+                className="mt-[20px] text-[22px] font-medium leading-[1.1] tracking-[-0.03em] transition-transform duration-500 ease-out group-hover/exp:translate-x-[4px] md:mt-[28px] md:text-[24px]"
                 style={{ fontFamily: "var(--font-inter)" }}
               >
                 {e.title}
               </h3>
               <ul className="mt-[20px] space-y-[8px] md:mt-[28px]">
-                {e.items.map((i) => (
+                {e.items.map((i, itemIdx) => (
                   <li
                     key={i}
-                    className="text-[14px] leading-[1.45] text-black/75 md:text-[15px]"
+                    className="text-[14px] leading-[1.45] text-black/75 transition-all duration-300 ease-out group-hover/exp:translate-x-[4px] group-hover/exp:text-black md:text-[15px]"
+                    style={{ transitionDelay: `${itemIdx * 40}ms` }}
                   >
                     {i}
                   </li>

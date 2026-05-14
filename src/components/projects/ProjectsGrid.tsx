@@ -235,6 +235,9 @@ export default function ProjectsGrid({ items }: { items: PortfolioItem[] }) {
   // Card-level animations: mobile stagger fade-up, desktop pinned horizontal scroll.
   useLayoutEffect(() => {
     if (!sectionRef.current) return;
+    // Drop stale DOM refs from the previous filter before React re-attaches them.
+    mobileCardsRef.current = [];
+    desktopCardsRef.current = [];
     const mm = gsap.matchMedia();
 
     // ---- Mobile: simple stagger fade-up ----
@@ -333,8 +336,20 @@ export default function ProjectsGrid({ items }: { items: PortfolioItem[] }) {
       }
     });
 
+    // Layout changed (new card count) — make ScrollTrigger recompute pin distances.
+    ScrollTrigger.refresh();
+
     return () => mm.revert();
   }, [filtered]);
+
+  // When the active tag changes, jump back to the section top so the user actually
+  // sees the new results instead of being stranded inside the prior pin's range.
+  useLayoutEffect(() => {
+    if (!sectionRef.current) return;
+    if (typeof window === "undefined") return;
+    const top = sectionRef.current.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top, behavior: "auto" });
+  }, [activeTag]);
 
   return (
     <section ref={sectionRef} className="bg-[#f7f7f6] text-black">
